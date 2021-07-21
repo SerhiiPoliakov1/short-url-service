@@ -3,8 +3,9 @@ package com.shorturlservice.shorturl.model;
 import org.apache.commons.text.RandomStringGenerator;
 import org.springframework.stereotype.Component;
 
+
 @Component
-class CodeGenerator {
+public class CodeGenerator {
     private RandomStringGenerator randomStringGenerator;
 
     public CodeGenerator() {

@@ -11,15 +11,19 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URLDecoder;
+import java.security.Principal;
 import java.time.ZonedDateTime;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping
+@CrossOrigin
 public
 class ShorterController {
     Logger logger = LoggerFactory.getLogger(ShorterController.class.getSimpleName());
@@ -63,9 +67,15 @@ class ShorterController {
         }
     }
 
-    @GetMapping
+    @GetMapping(path =  "/callback")
     public ResponseEntity getAll() {
+
         return ResponseEntity.ok(repository.findAll());
+    }
+
+    @DeleteMapping(path = "/delete/all")
+    public void  deleteAll(){
+        repository.deleteAll();
     }
 
 }
